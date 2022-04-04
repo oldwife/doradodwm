@@ -902,9 +902,10 @@ drawbar(Monitor *m)
 
 	if ((w = m->ww - tw - x) > bh) {
 		if (m->sel) {
-			int mid = (m->ww - TEXTW(m->sel->name)) / 2 - x;
+/*  			int mid = (m->ww - TEXTW(m->sel->name)) / 2 - x; */
 			drw_setscheme(drw, scheme[m == selmon ? SchemeTitle : SchemeNorm]);
-			drw_text(drw, x, 0, w, bh, mid, m->sel->name, 0);
+/*  			drw_text(drw, x, 0, w, bh, mid, m->sel->name, 0); */
+			drw_text(drw, x, 0, w, bh, lrpad / 2, m->sel->name, 0);
 			if (m->sel->isfloating)
 				drw_rect(drw, x + boxs, boxs, boxw, boxw, m->sel->isfixed, 0);
 		} else {
@@ -1248,13 +1249,13 @@ loadxrdb()
       xrdb = XrmGetStringDatabase(resm);
 
       if (xrdb != NULL) {
-        XRDB_LOAD_COLOR("dwm.color7", titlefgcolor);
+        XRDB_LOAD_COLOR("dwm.color8", titlefgcolor);
         XRDB_LOAD_COLOR("dwm.color8", normbordercolor);
         XRDB_LOAD_COLOR("dwm.color1", selbordercolor);
         XRDB_LOAD_COLOR("dwm.color0", normbgcolor);
         XRDB_LOAD_COLOR("dwm.color8", normfgcolor);
         XRDB_LOAD_COLOR("dwm.color0", selbgcolor);
-        XRDB_LOAD_COLOR("dwm.color2", selfgcolor);
+        XRDB_LOAD_COLOR("dwm.color15", selfgcolor);
       }
     }
   }
@@ -1305,6 +1306,8 @@ manage(Window w, XWindowAttributes *wa)
 	updatewindowtype(c);
 	updatesizehints(c);
 	updatewmhints(c);
+	c->x = c->mon->mx + (c->mon->mw - WIDTH(c)) / 2;
+	c->y = c->mon->my + (c->mon->mh - HEIGHT(c)) / 2;
 	XSelectInput(dpy, w, EnterWindowMask|FocusChangeMask|PropertyChangeMask|StructureNotifyMask);
 	grabbuttons(c, 0);
 	if (!c->isfloating)
