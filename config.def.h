@@ -127,7 +127,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_9,                      8)
 	
 	/*replacements for sxhkd */
-	{ MODKEY|ShiftMask,   XK_w,    spawn,	SHCMD("qutebrowser") },
+	{ MODKEY,             XK_w,    spawn,	SHCMD("qutebrowser") },
 	{ MODKEY,             XK_t,    spawn,	SHCMD("bashwal -t") },
 	{ 0, XF86XK_AudioMute,	       spawn,	SHCMD("pactl set-sink-mute   @DEFAULT_SINK@ toggle ; bar") },
 	{ 0, XF86XK_AudioRaiseVolume,  spawn,	SHCMD("pactl set-sink-volume @DEFAULT_SINK@ +10%   ; bar") },
